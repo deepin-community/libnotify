@@ -1,7 +1,7 @@
 project('libnotify',
   'c',
-  version: '0.7.9',
-  meson_version: '>= 0.47.0')
+  version: '0.8.6',
+  meson_version: '>= 0.56.0')
 
 gnome = import('gnome')
 pkgconfig = import('pkgconfig')
@@ -22,8 +22,11 @@ LT_CURRENT=4
 LT_REVISION=0
 LT_AGE=0
 
+API_VERSION = 7
+
 VERSION_ARRAY = meson.project_version().split('.')
-MODULE_VERSION = '@0@.@1@'.format(VERSION_ARRAY[0], VERSION_ARRAY[1])
+# Minor version is hardcoded until we have a real API break
+MODULE_VERSION = '@0@.@1@'.format(VERSION_ARRAY[0], API_VERSION)
 LIBNAME = meson.project_name().split('lib')[1]
 
 default_includes = include_directories('.')
@@ -36,7 +39,7 @@ man1dir = join_paths(prefix, get_option('mandir'), 'man1')
 libnotify_deps = []
 extra_deps = []
 
-glib_req_version = '>= 2.26.0'
+glib_req_version = '>= 2.62.0'
 
 gdk_pixbuf_dep = dependency('gdk-pixbuf-2.0')
 glib_dep = dependency('glib-2.0', version: glib_req_version)
@@ -66,7 +69,7 @@ if get_option('man')
     '@INPUT@',
   ]
 
-  testrun = run_command(xsltproc, '--nonet', stylesheet)
+  testrun = run_command(xsltproc, '--nonet', stylesheet, check: false)
 
   if testrun.returncode() != 0
     error('DocBook stylesheet for generating man pages not found, you need to install docbook-xsl-ns or similar package.')

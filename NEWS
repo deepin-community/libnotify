@@ -1,3 +1,152 @@
+New in 0.8.6
+============
+
+This contains no substantive code changes compared to 0.8.5. Version 0.8.5 did
+not get properly distributed due to a CI configuration issue.
+
+* ci: Don't try to run tests for dist job [Logan Rathbone]
+
+Contributors:
+  Logan Rathbone
+
+New in 0.8.5
+============
+
+This is a bugfix release.
+
+* Revert usage of autopointers (#54) [Logan Rathbone]
+* notify-send: wait timeout variable should be int, not long [Logan Rathbone]
+* test: make tests run with `meson test` (#30) [Logan Rathbone, with thanks to
+  'matoro']
+* notify-send: Utilize app_icon property rather than icon-name (#53) [Logan
+  Rathbone]
+* notify: constructor should set app-icon property, not icon-name (#53) [Logan
+  Rathbone]
+* Revert updating of meson stylesheet URL (!46) [Jan Tojnar]
+
+Contributors:
+  Jan Tojnar, matoro, Logan Rathbone
+
+New in 0.8.4
+============
+
+* notification: Set the icon-name property as image hint instead of as app-icon
+  [Julian Sparber]
+* notify-send: Require valid UTF-8 for Summary and Body [Logan Rathbone]
+* notify-send: Allow sending an empty summary [Evy Garden]
+* notify-send: Flush stdout after printing notification ID [delthas]
+* build: Improve mapfile and support building in solaris [Alan Coopersmith]
+* libnotify/notification: Modernize the NotifyNotification class definition
+  (and add support for auto-pointers) [Marco Trevisan]
+
+* Bugs fixed:
+  - #35 notify-send dumps core if notification message is invalid UTF-8 [Logan
+    Rathbone]
+  - #39 libnotify should be quiet [Bastien Nocera]
+  - #44 fdo documentation link outdated in README.md [Marco Trevisan]
+
+Contributors:
+  Alan Coopersmith, Bastien Nocera, Evy Garden, Julian Sparber, Logan Rathbone,
+  Marco Trevisan, Sertonix, delthas
+
+New in 0.8.3
+============
+
+This release contains a critical stability/minor security update which affects
+Electron applications that utilize Portal notifications (eg, through Flatpak).
+It is highly recommended that all users of libnotify 0.8.x update to this
+release.
+
+Please note that this fix has increased the minimum required version of glib to
+2.62.0.
+
+* notification: Use g_signal_connect_object (#34) [Maximiliano]
+* notification: Move disconnect to dispose [Maximiliano]
+
+Contributors:
+  Maximiliano Sandoval R
+
+New in 0.8.2
+============
+
+* Set new summary for library [Maximiliano]
+* docs: port to gi-docgen [Maximiliano]
+* docs: Fix URL to Desktop Notification Spec [Andre]
+* meson: replace deprecated meson.source_root() calls [Kai]
+* meson: bump minimum meson version to 0.58 [centaurii]
+* Introspection docs fixes [Maximiliano, Logan]
+
+Contributors:
+  Maximiliano Sandoval R, Andre Klapper, Kai Smith, centaurii, Logan Rathbone
+
+New in 0.8.1
+============
+
+* Keep version of bindings at 0.7 (#27) [Marco]
+
+Contributors:
+  Marco Trevisan
+
+New in 0.8.0
+============
+
+* Use Desktop Portal Notification when running confined (snap and flatpak)
+  Now the library acts like a wrapper in such scenario, with some limited
+  capabilities, but this will enforce security and user control over the
+  allowed notifications. [Marco]
+* notify-send: Handles SIGINT gracefully, closing waiting notification [Marco]
+* Use NotifyClosedReason enum as closed reason return value [Marco]
+* Bump dependency on GLib 2.38 [Marco]
+* Various introspection docs improvements and fixes [Marco]
+
+Contributors:
+  Marco Trevisan
+
+New in 0.7.12
+=============
+
+* docs/notify-send: Add --transient option to manpage [Marco]
+* notify-send: Move server capabilities check to a separate function [Marco]
+* notify-send: Add debug message about server not supporting persistence
+  [Marco]
+* notification: Include sender-pid hint by default if not provided [Marco]
+* Delete unused notifynotification.xml [Patrick; !25]
+* notification: Bookend calling NotifyActionCallback with temporary ref
+  [Logan; #25, !26]
+
+Contributors:
+  Marco Trevisan, Patrick Griffis, Logan Rathbone
+
+New in 0.7.11
+=============
+* Fix potential build errors with old glib version we require
+* notify-send: Add support for boolean hints
+* notify-send: Support passing any hint value, by parsing variant strings
+* notify-send: Add explicit option to create transient notifications
+
+Contributors:
+  Marco Trevisan
+
+New in 0.7.10
+=============
+* notify-send: Support commas in icon filenames [Thorsten; !15]
+* notify-send: Give failing exit code if showing notification fails [Ray, !13]
+* notify-send: Support for replacing an existing notification [Paul; !17]
+* notify-send: Add option to wait until notification has been closed [Ben; !18]
+* notify-send: Add support for notification actions and responses [Ben; !18]
+* notification: Send the application ID when possible [Corentin; !1]
+* notification: Use g_memdup2 when available [Marco; !22]
+* notification: Improve SNAP detection and confined desktop ID [Marco; !23]
+* notification: Add support for getting actions activation token [Marco; !24]
+* notify: Use application ID if any to set the fallback app name [Marco; !18]
+* Build fixes and improvements [Marco; !22]
+* Docs updates [Boris, David; !14, !20]
+
+Contributors:
+  Marco Trevisan, Boris Shtrasman, Matthias Sweertvaegher, Thorsten Wißmann,
+  Ray Strode, Maximiliano Sandoval R, David King, Corentin Noël, Paul Collins,
+  Matthias Sweertvaegher, Ben Blain
+
 New in 0.7.9
 ============
 * Fixed linking in darwin [Iain, Marco; !5]

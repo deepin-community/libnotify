@@ -37,16 +37,20 @@ libnotify_cflags = [
 ]
 
 mapfile = meson.project_name() + '.map'
-libnotify_ldflags = cc.get_supported_link_arguments([
-  '-Wl,--version-script,'+join_paths(meson.current_source_dir(), mapfile),
-])
+mapfile_flags = \
+  '-Wl,--version-script,'+join_paths(meson.current_source_dir(), mapfile)
+if host_machine.system() == 'sunos'
+  # Solaris 11.4 requires an extra flag to recgonize GNU format mapfiles
+  mapfile_flags = '-Wl,-zgnu-version-script-compat,' + \
+                  mapfile_flags.replace('-Wl,', '')
+endif
+libnotify_ldflags = cc.get_supported_link_arguments([mapfile_flags])
 
 notify_dep = declare_dependency(
   include_directories: default_includes,
   dependencies: libnotify_deps,
   compile_args: libnotify_cflags,
   sources: headers + [enum_types[1]] + [marshal[1]],
-  link_args: libnotify_ldflags,
 )
 
 libnotify_lib = shared_library(LIBNAME,
@@ -55,6 +59,7 @@ libnotify_lib = shared_library(LIBNAME,
   version: '@0@.@1@.@2@'.format(LT_CURRENT, LT_REVISION, LT_AGE),
   soversion: LT_CURRENT,
   install: true,
+  link_args: libnotify_ldflags,
 )
 
 libnotify_dep = declare_dependency(
@@ -69,9 +74,10 @@ pkgconfig.generate(libnotify_lib,
 )
 
 introspection = get_option('introspection')
-if not introspection.disabled()
-  find_program('g-ir-scanner', required: introspection.enabled())
-  gnome.generate_gir(libnotify_lib,
+g_ir_scanner = find_program('g-ir-scanner', required: introspection.enabled())
+
+if g_ir_scanner.found() and not introspection.disabled()
+  libnotify_gir = gnome.generate_gir(libnotify_lib,
     sources: headers + sources + enum_types,
     namespace: 'Notify',
     nsversion: MODULE_VERSION,
