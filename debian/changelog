@@ -1,3 +1,92 @@
+libnotify (0.8.6-1) unstable; urgency=medium
+
+  * New upstream release
+  * Don't run new build tests. See upstream #59
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Thu, 17 Apr 2025 15:18:12 -0400
+
+libnotify (0.8.4-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/libnotify4.symbols: Add new symbols
+  * debian/libnotify-doc.links: Symlink documentation to devhelp path
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 20 Feb 2025 04:31:13 +0100
+
+libnotify (0.8.3-1) unstable; urgency=medium
+
+  * New upstream release
+  * Bump minimum glib to 2.62.0
+  * Bump Standards-Version to 4.6.2
+  * Stop using debian/control.in and dh-sequence-gnome
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Mon, 27 Nov 2023 11:37:17 -0500
+
+libnotify (0.8.2-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/control.in: Set minimum meson to 0.58
+  * Build-Depend on gi-docgen instead of gtk-doc-tools
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Mon, 29 May 2023 16:42:15 -0400
+
+libnotify (0.8.1-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #1015006, #1015008)
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Sun, 17 Jul 2022 16:52:02 +0200
+
+libnotify (0.8.0-1) unstable; urgency=medium
+
+  * New upstream release
+  * debian/libnotify4.symbols: Update
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 14 Jul 2022 17:42:26 +0200
+
+libnotify (0.7.12-1) unstable; urgency=medium
+
+  * New upstream release:
+    - Fix crash when activating action with electron apps
+  * debian/patches:
+    - Drop applied upstream
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 05 May 2022 19:55:36 +0200
+
+libnotify (0.7.11-2) unstable; urgency=medium
+
+  * debian/tests: Use python-dbusmock to run notification tests.
+    Avoid installing notification-daemon, while we can handle all this
+    without X11 and using dbus-mock to simulate a notification daemon.
+  * debian/patches: Expose sender-pid by default when not set
+  * debian/tests/build: Ensure that notification worked.
+  * debian/control: Only suggest any implementer of FDO notification daemon.
+    While the library would work better when a daemon implements the API,
+    we can just be more flexible and we can just downgrade to suggests while
+    notification-daemon can be now implemented by multiple packages.
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 28 Apr 2022 16:54:44 +0200
+
+libnotify (0.7.11-1) unstable; urgency=medium
+
+  * New upstream release:
+    - notify-send: Support for replacing an existing notification (LP: #257135,
+      Closes: #559544)
+    - notify-send: Support commas in icon filenames (LP: #674642)
+    - notify-send: Give failing exit code if showing notification fails
+      (LP: #1970647, Closes: #609556, Closes: #679653)
+    - notify-send: Add support for notification actions and responses
+      (Closes: #571181)
+    - notify-send: Add option to wait until notification has been closed
+    - notify-send: Add support for boolean hints (Closes: #636343)
+    - docs/notify-send: Add missing --app-name to manpage (Closes: #756151)
+  * debian/rules: Use DPKG_GENSYMBOLS_CHECK_LEVEL instead of override
+  * debian: Use debhelper 13, and remove explicit --fail-missing
+  * debian/control: Update Standards-Version, no change needed
+  * debian/libnotify4.symbols: Add new symbols
+  * debian/patches: Add transient option to man
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Wed, 27 Apr 2022 21:47:25 +0200
+
 libnotify (0.7.9-3) unstable; urgency=medium
 
   * Team upload

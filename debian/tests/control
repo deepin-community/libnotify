@@ -1,2 +1,5 @@
-Tests: build
-Depends: build-essential, dbus (>= 1.8), notification-daemon:native, xauth, xvfb, libnotify-dev, pkg-config
+Test-Command: dbus-run-session -- sh -x debian/tests/build
+Depends: build-essential, dbus (>= 1.8), python3-dbusmock, libnotify-dev, pkg-config
+Features: test-name=build-and-test-notification
+Classes: desktop
+Restrictions: allow-stderr

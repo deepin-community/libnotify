@@ -26,6 +26,10 @@
 #define NOTIFY_DBUS_CORE_INTERFACE "org.freedesktop.Notifications"
 #define NOTIFY_DBUS_CORE_OBJECT    "/org/freedesktop/Notifications"
 
+#define NOTIFY_PORTAL_DBUS_NAME           "org.freedesktop.portal.Desktop"
+#define NOTIFY_PORTAL_DBUS_CORE_INTERFACE "org.freedesktop.portal.Notification"
+#define NOTIFY_PORTAL_DBUS_CORE_OBJECT    "/org/freedesktop/portal/desktop"
+
 G_BEGIN_DECLS
 
 GDBusProxy      * _notify_get_proxy                         (GError **error);
@@ -35,6 +39,14 @@ void            _notify_cache_remove_notification           (NotifyNotification 
 gint            _notify_notification_get_timeout            (const NotifyNotification *n);
 gboolean        _notify_notification_has_nondefault_actions (const NotifyNotification *n);
 gboolean        _notify_check_spec_version                  (int major, int minor);
+
+const char     * _notify_get_snap_name                      (void);
+const char     * _notify_get_snap_path                      (void);
+const char     * _notify_get_snap_app                       (void);
+
+const char     * _notify_get_flatpak_app                    (void);
+
+gboolean        _notify_uses_portal_notifications           (void);
 
 G_END_DECLS
 

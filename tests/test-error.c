@@ -29,10 +29,6 @@ main ()
 {
         NotifyNotification *n;
 
-#if !GLIB_CHECK_VERSION (2, 36, 0)
-        g_type_init ();
-#endif
-
         notify_init ("Error Handling");
 
         n = notify_notification_new ("Summary", "Content", NULL);
